@@ -1,18 +1,10 @@
-# MyContacts-DesignPatterns
-
-
-UC1 – User Registration (MyContactsPatterns)
-
 Overview
-UC1 implements User Registration for the MyContacts App.
-It demonstrates object-oriented design and design patterns 
-in Java by allowing new users to register with their email, password, and profile information.
+UC3 allows logged-in users to update their profile 
+information (name, password) with undo/redo support using the Command Pattern.
 
 Features
 
-Create new users (FreeUser or PremiumUser).
-Encapsulation of user data (private fields with getters).
-Password hashing (basic example using hashCode, can be extended to MessageDigest).
-Factory Pattern for user type creation.
-Builder Pattern for flexible user object construction.
-Exception handling and input validation (extendable with regex for email).
+Update profile fields (name, password).
+Undo/Redo changes with CommandManager.
+Encapsulation of user data with setters.
+Command Pattern for reversible actions.
