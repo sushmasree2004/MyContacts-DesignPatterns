@@ -1,14 +1,26 @@
 package com.main;
 
 import com.UserManagement.*;
+import java.util.Optional;
 
 public class Main {
-    public static void main(String[] args) {
-        // Using the factory to create users
-        User user1 = UserFactory.createUser("free", "sushma@example.com", "hashedPass123", "Sushma");
-        User user2 = UserFactory.createUser("premium", "raj@example.com", "hashedPass456", "Raj");
+	public static void main(String[] args) 
+	{
+		// Register user (UC1)
+		User user1 = UserFactory.createUser("free", "sushma@example.com", Integer.toHexString("securePass123".hashCode()), "Sushma");
 
-        System.out.println("Registered: " + user1.getName() + " (" + user1.getEmail() + ")");
-        System.out.println("Registered: " + user2.getName() + " (" + user2.getEmail() + ")");
-    }
+		// Authenticate with BasicAuth (UC2)
+		Authentication auth = new BasicAuth(user1);
+		Optional<User> loggedIn = auth.login("sushma@example.com", "securePass123");
+
+		if (loggedIn.isPresent()) 
+		{
+			SessionManager.getInstance().setUser(loggedIn.get());
+			System.out.println("Login successful! Current user: " + SessionManager.getInstance().getUser().getName());
+		} 
+		else 
+		{
+			System.out.println("Login failed. Invalid credentials.");
+		}
+	}
 }
