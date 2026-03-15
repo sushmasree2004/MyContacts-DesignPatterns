@@ -1,17 +1,25 @@
 Overview
 
-UC9 implements Search Contacts for the MyContacts App.
-It allows logged-in users to search contacts by name, phone, email, or tags.
-This use case demonstrates flexible query composition and 
-filtering using the Specification Pattern and Chain of Responsibility Pattern.
+UC10 implements Advanced Filtering for the MyContacts App.
+It allows logged-in users to apply multiple filters (by tag, date added, frequency of contact) 
+sort results using different strategies.
+This use case demonstrates multi-level filtering with the Composite Pattern 
+and flexible sorting with the Strategy Pattern.
 
 Features
 
-Search by multiple fields: name, phone number, email address, tags.
-Case-insensitive matching and regex support.
-Combine multiple criteria with Specification Pattern.
-Sequential search pipeline with Chain of Responsibility.
-Functional programming with Java Streams and Predicates.
+Filter contacts by:
+Tag (e.g., VIP, Business).
+Date added (contacts created after a given date).
+Frequency (contacts interacted with more than N times).
+Combine multiple filters with CompositeFilter.
+Sort results using different strategies:
 
-Version : 9
+By name.
+By date added.
+By frequency.
+
+Extensible design: new filters and sorting strategies can be added easily.
+
+Version : 10
 Author : B.Sushma Sree

@@ -4,58 +4,53 @@ import com.contactManagement.Contact;
 import com.contactManagement.ContactBuilder;
 import com.contactSearch.*;
 
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Main 
 {
-	public static void main(String[] args) 
-	{
-		// Create sample contacts using builder
-		Contact contact1 = new ContactBuilder()
-				.setName("Sushma")
-				.addPhone("9876543210")
-				.addEmail("sushma@example.com")
-				.setTags(List.of("VIP"))
-				.setType("person")
-				.setExtra("Nickname: Sush")
-				.build();
+    public static void main(String[] args) 
+    {
+        // Create sample contacts
+        Contact contact1 = new ContactBuilder()
+                .setName("Sushma")
+                .addPhone("9876543210")
+                .addEmail("sushma@example.com")
+                .setTags(List.of("VIP"))
+                .setType("person")
+                .setExtra("Nickname: Sush")
+                .build();
+        contact1.setFrequency(10);
 
-		Contact contact2 = new ContactBuilder()
-				.setName("TechCorp")
-				.addPhone("0801234567")
-				.addEmail("info@techcorp.com")
-				.setTags(List.of("Business"))
-				.setType("organization")
-				.setExtra("Industry: IT")
-				.build();
+        Contact contact2 = new ContactBuilder()
+                .setName("TechCorp")
+                .addPhone("0801234567")
+                .addEmail("info@techcorp.com")
+                .setTags(List.of("Business"))
+                .setType("organization")
+                .setExtra("Industry: IT")
+                .build();
+        contact2.setFrequency(3);
 
-		List<Contact> contacts = List.of(contact1, contact2);
+        List<Contact> contacts = List.of(contact1, contact2);
 
-		//  Specification Pattern 
-		System.out.println("Specification Pattern Search ");
-		SearchCriteria criteria = new CompositeCriteria(
-				List.of(new NameCriteria("Sushma"), new TagCriteria("VIP"))
-				);
-		List<Contact> specResult = contacts.stream()
-				.filter(criteria.toPredicate())
-				.toList();
-		System.out.println("Result: " + specResult);
+        // Composite Filter 
+        Filter tagFilter = new TagFilter("VIP");
+        Filter dateFilter = new DateAddedFilter(LocalDateTime.now().minusDays(1));
+        Filter frequencyFilter = new FrequencyFilter(5);
 
-		// Chain of Responsibility 
-		System.out.println("\nChain of Responsibility Search ");
-		NameSearchHandler nameHandler = new NameSearchHandler();
-		PhoneSearchHandler phoneHandler = new PhoneSearchHandler();
-		EmailSearchHandler emailHandler = new EmailSearchHandler();
-		TagSearchHandler tagHandler = new TagSearchHandler();
+        CompositeFilter compositeFilter = new CompositeFilter(List.of(tagFilter, dateFilter, frequencyFilter));
+        List<Contact> filtered = compositeFilter.apply(contacts);
+        System.out.println("Filtered Contacts: " + filtered);
 
-		// Chain setup
-		nameHandler.setNext(phoneHandler);
-		phoneHandler.setNext(emailHandler);
-		emailHandler.setNext(tagHandler);
+        // Strategy Pattern for Sorting 
+        FilterStrategy sortByName = new SortByNameStrategy();
+        FilterStrategy sortByDate = new SortByDateStrategy();
+        FilterStrategy sortByFrequency = new SortByFrequencyStrategy();
 
-		System.out.println("Search by name 'TechCorp': " + nameHandler.handle(contacts, "TechCorp"));
-		System.out.println("Search by phone '9876543210': " + nameHandler.handle(contacts, "9876543210"));
-		System.out.println("Search by email 'info@techcorp.com': " + nameHandler.handle(contacts, "info@techcorp.com"));
-		System.out.println("Search by tag 'VIP': " + nameHandler.handle(contacts, "VIP"));
-	}
+        System.out.println("Sorted by Name: " + sortByName.sort(contacts));
+        System.out.println("Sorted by Date: " + sortByDate.sort(contacts));
+        System.out.println("Sorted by Frequency: " + sortByFrequency.sort(contacts));
+    }
 }
