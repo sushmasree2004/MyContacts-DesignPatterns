@@ -1,25 +1,18 @@
-Overview
 
-UC10 implements Advanced Filtering for the MyContacts App.
-It allows logged-in users to apply multiple filters (by tag, date added, frequency of contact) 
-sort results using different strategies.
-This use case demonstrates multi-level filtering with the Composite Pattern 
-and flexible sorting with the Strategy Pattern.
+
+UC11 – Create and Manage Tags
+
+UC11 introduces tag creation and management in the MyContacts App.
+It allows logged-in users to create custom tags (e.g., Family, Work, Friends) to organize contacts.
+This use case demonstrates validation, uniqueness, and efficient tag sharing using the Flyweight Pattern.
 
 Features
 
-Filter contacts by:
-Tag (e.g., VIP, Business).
-Date added (contacts created after a given date).
-Frequency (contacts interacted with more than N times).
-Combine multiple filters with CompositeFilter.
-Sort results using different strategies:
+Create custom tags with validation (no empty names, no duplicates).
+Many-to-many relationship between Contact and Tag.
+Support for predefined tags (Family, Work, Friends) via an enum.
+Use of Java Set for uniqueness.
+Proper equals() and hashCode() implementation for tag comparison.
 
-By name.
-By date added.
-By frequency.
-
-Extensible design: new filters and sorting strategies can be added easily.
-
-Version : 10
+Version : 11
 Author : B.Sushma Sree
