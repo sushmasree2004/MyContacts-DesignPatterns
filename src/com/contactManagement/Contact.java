@@ -21,11 +21,31 @@ public abstract class Contact
 		this.createdAt = LocalDateTime.now();
 	}
 
+
 	public UUID getId() { return id; }
 	public String getName() { return name; }
 	public List<PhoneNumber> getPhoneNumbers() { return phoneNumbers; }
 	public List<Email> getEmails() { return emails; }
 	public LocalDateTime getCreatedAt() { return createdAt; }
+
+
+	public void setName(String name) 
+	{
+		if (name != null && !name.isBlank()) 
+		{
+			this.name = name;
+		}
+	}
+
+	public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) 
+	{
+		this.phoneNumbers = List.copyOf(phoneNumbers); // defensive copy
+	}
+
+	public void setEmails(List<Email> emails) 
+	{
+		this.emails = List.copyOf(emails);
+	}
 
 	@Override
 	public String toString() 

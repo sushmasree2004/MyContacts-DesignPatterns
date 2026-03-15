@@ -1,19 +1,17 @@
 Overview
 
-UC5 implements Contact Viewing for the MyContacts App.
-It allows logged-in users to view complete information 
-of a specific contact, with flexible display formatting using the Decorator Pattern.
+Overview
+UC6 implements Contact Editing for the MyContacts App.
+It allows logged-in users to modify existing contact information (name, emails, etc.)
+with undo/redo support using the Command Pattern and Memento Pattern.
 
 Features
 
-View full contact details (name, phone numbers, emails, optional fields).
-toString() override for clean display formatting.
-Decorator Pattern for enhanced views:
-Uppercase formatting of contact details.
-Masked email display for privacy.
-Safe handling of optional fields using Optional.
-Immutable view objects for display.
+Edit contact details (name, emails, phones).
+Undo/Redo changes with ContactCaretaker.
+Encapsulation of edit actions in command classes.
+State preservation with Memento Pattern.
+Defensive copying to avoid accidental mutations.
 
-
-Version : 5
+Version : 6
 Author : B.Sushma Sree
