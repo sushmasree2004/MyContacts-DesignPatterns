@@ -1,20 +1,19 @@
 Overview
 
-UC4 implements Contact Creation for the MyContacts App.
-It allows logged-in users to add new contacts with 
-multiple phone numbers, email addresses, and optional fields.
-This use case demonstrates object-oriented composition, Builder Pattern, and Factory Pattern in Java.
+UC5 implements Contact Viewing for the MyContacts App.
+It allows logged-in users to view complete information 
+of a specific contact, with flexible display formatting using the Decorator Pattern.
 
 Features
 
-Create contacts of type Person or Organization.
-Support for multiple phone numbers and email addresses.
-Automatic assignment of UUID for unique IDs.
-Timestamp (LocalDateTime) for when the contact was created.
-Encapsulation of contact details with getters.
-Flexible construction using Builder Pattern.
-Centralized creation logic using Factory Pattern.
+View full contact details (name, phone numbers, emails, optional fields).
+toString() override for clean display formatting.
+Decorator Pattern for enhanced views:
+Uppercase formatting of contact details.
+Masked email display for privacy.
+Safe handling of optional fields using Optional.
+Immutable view objects for display.
 
 
-Version : 4
+Version : 5
 Author : B.Sushma Sree

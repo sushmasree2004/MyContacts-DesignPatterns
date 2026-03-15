@@ -4,9 +4,9 @@ import com.contactManagement.*;
 
 public class Main 
 {
-	public static void main(String[] args) 
+	public static void main(String[] args)
 	{
-		Contact contact1 = new ContactBuilder()
+		Contact contact = new ContactBuilder()
 				.setName("Sushma")
 				.addPhone("9876543210")
 				.addEmail("sushma@example.com")
@@ -14,15 +14,14 @@ public class Main
 				.setType("person")
 				.build();
 
-		Contact contact2 = new ContactBuilder()
-				.setName("TechCorp")
-				.addPhone("0801234567")
-				.addEmail("info@techcorp.com")
-				.setExtra("IT Industry")
-				.setType("organization")
-				.build();
+		System.out.println("Original: " + contact);
 
-		System.out.println(contact1);
-		System.out.println(contact2);
+		// Uppercase decorator
+		Contact upperCaseContact = new UpperCaseDecorator(contact);
+		System.out.println("Uppercase: " + upperCaseContact);
+
+		// Masked email decorator
+		Contact maskedEmailContact = new MaskedEmailDecorator(contact);
+		System.out.println("Masked Email: " + maskedEmailContact);
 	}
 }
