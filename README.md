@@ -1,19 +1,17 @@
 Overview
 
-
-UC8 implements Bulk Operations for the MyContacts App.
-It allows logged-in users to perform actions (delete, tag, export) on multiple contacts at once.
-This use case demonstrates uniform treatment of individual and grouped contacts using the Composite Pattern.
+UC9 implements Search Contacts for the MyContacts App.
+It allows logged-in users to search contacts by name, phone, email, or tags.
+This use case demonstrates flexible query composition and 
+filtering using the Specification Pattern and Chain of Responsibility Pattern.
 
 Features
 
-Perform operations on multiple contacts simultaneously:
-Bulk delete
-Bulk tagging
-Bulk export
-Treat individual contacts and groups uniformly with the Composite Pattern.
-Use of Streams API and lambda expressions for batch processing.
-Extensible design: new operations can be added easily.
+Search by multiple fields: name, phone number, email address, tags.
+Case-insensitive matching and regex support.
+Combine multiple criteria with Specification Pattern.
+Sequential search pipeline with Chain of Responsibility.
+Functional programming with Java Streams and Predicates.
 
-Version : 8
+Version : 9
 Author : B.Sushma Sree

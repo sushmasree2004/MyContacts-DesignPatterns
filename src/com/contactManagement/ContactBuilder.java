@@ -3,46 +3,57 @@ package com.contactManagement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactBuilder
-{
-	private String name;
-	private List<PhoneNumber> phones = new ArrayList<>();
-	private List<Email> emails = new ArrayList<>();
-	private String extra;
-	private String type = "person";
+public class ContactBuilder {
+    private String name;
+    private List<PhoneNumber> phoneNumbers = new ArrayList<>();
+    private List<Email> emails = new ArrayList<>();
+    private List<String> tags = new ArrayList<>();   // ✅ added tags
+    private String extra;
+    private String type;
 
-	public ContactBuilder setName(String name) 
-	{
-		this.name = name;
-		return this;
-	}
+    // Setters for builder
+    public ContactBuilder setName(String name) {
+        this.name = name;
+        return this;
+    }
 
-	public ContactBuilder addPhone(String number)
-	{
-		this.phones.add(new PhoneNumber(number));
-		return this;
-	}
+    public ContactBuilder addPhone(String number) {
+        this.phoneNumbers.add(new PhoneNumber(number));
+        return this;
+    }
 
-	public ContactBuilder addEmail(String address) 
-	{
-		this.emails.add(new Email(address));
-		return this;
-	}
+    public ContactBuilder addEmail(String address) {
+        this.emails.add(new Email(address));
+        return this;
+    }
 
-	public ContactBuilder setExtra(String extra) 
+    public ContactBuilder setTags(List<String> tags) {   // ✅ new method
+        this.tags = tags;
+        return this;
+    }
 
-	{
-		this.extra = extra;
-		return this;
-	}
+    public ContactBuilder setExtra(String extra) {
+        this.extra = extra;
+        return this;
+    }
 
-	public ContactBuilder setType(String type) {
-		this.type = type;
-		return this;
-	}
+    public ContactBuilder setType(String type) {
+        this.type = type;
+        return this;
+    }
 
-	public Contact build() 
-	{
-		return ContactFactory.createContact(type, name, phones, emails, extra);
-	}
+    // Build method
+    public Contact build() {
+        if (type == null) {
+            throw new IllegalArgumentException("Contact type must be specified");
+        }
+
+        if (type.equalsIgnoreCase("person")) {
+            return new Person(name, phoneNumbers, emails, tags, extra);
+        } else if (type.equalsIgnoreCase("organization")) {
+            return new Organization(name, phoneNumbers, emails, tags, extra);
+        } else {
+            throw new IllegalArgumentException("Unknown contact type: " + type);
+        }
+    }
 }
