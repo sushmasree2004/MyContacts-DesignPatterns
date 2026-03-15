@@ -1,10 +1,20 @@
 Overview
-UC3 allows logged-in users to update their profile 
-information (name, password) with undo/redo support using the Command Pattern.
+
+UC4 implements Contact Creation for the MyContacts App.
+It allows logged-in users to add new contacts with 
+multiple phone numbers, email addresses, and optional fields.
+This use case demonstrates object-oriented composition, Builder Pattern, and Factory Pattern in Java.
 
 Features
 
-Update profile fields (name, password).
-Undo/Redo changes with CommandManager.
-Encapsulation of user data with setters.
-Command Pattern for reversible actions.
+Create contacts of type Person or Organization.
+Support for multiple phone numbers and email addresses.
+Automatic assignment of UUID for unique IDs.
+Timestamp (LocalDateTime) for when the contact was created.
+Encapsulation of contact details with getters.
+Flexible construction using Builder Pattern.
+Centralized creation logic using Factory Pattern.
+
+
+Version : 4
+Author : B.Sushma Sree
